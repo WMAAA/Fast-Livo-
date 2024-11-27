@@ -11,5 +11,5 @@
 **11.25：外参标定测试**
 ![FastLivo_ext](https://github.com/user-attachments/assets/6d235952-a04b-47a1-9366-d137048dc46b)
 
-**11.26 ~ 11.27：相机硬同步**
+**11.26 ~ 11.27：相机硬同步 + Lidar硬同步(PPS触发)**
 
