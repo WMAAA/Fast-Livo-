@@ -15,5 +15,6 @@
 
 **11.28 : 软同步（共享内存）**
 ![image](https://github.com/user-attachments/assets/e73cfc0c-e672-48ba-99f0-6254dc8904d8)
+![image](https://github.com/user-attachments/assets/49e0e73f-a432-4131-896c-2c4c046967e3)
 时间戳同步了，但是发布时间仍然没有同步
 
