@@ -24,4 +24,8 @@
 根据Add 0 3D Points，回到源程序，判断可能是点未在方框内，推测是外参矩阵问题，IMU-Lidar的之前在Fast-LIO中试过是可以的。
 推测可能是Lidar-Camera的问题，之前标外参是转置了，现在转回来尝试一下，就ok了。
 ![image](https://github.com/user-attachments/assets/a8bd62b9-804d-4126-bccd-855f9d3f9ee5)
+会出现漂移
 
+**11.30 ： 调优-> 外参标定multi_calib**
+![image](https://github.com/user-attachments/assets/225c5ade-f95b-49aa-af31-235a2eb5aa26)
+4个场景，两个室内，两个室外。
