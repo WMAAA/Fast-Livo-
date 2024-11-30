@@ -38,6 +38,9 @@
 效果不好
 ![image](https://github.com/user-attachments/assets/87b477d0-3e0c-4644-9cde-ca47f284e0b4)
 效果稍微好点
+尝试降采样，缩短时间38s->20s
+![image](https://github.com/user-attachments/assets/7fcb44dd-7897-49a5-ba5e-a146d75079e7)
+效果更差了
 ![image](https://github.com/user-attachments/assets/b7b25708-8970-4c99-b3c1-422b149b12ff)
 效果不好
 打算重新标定内参
