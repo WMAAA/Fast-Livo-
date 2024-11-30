@@ -44,4 +44,7 @@
 ![image](https://github.com/user-attachments/assets/b7b25708-8970-4c99-b3c1-422b149b12ff)
 效果不好
 打算重新标定内参
+ROS自带的标定
 ![image](https://github.com/user-attachments/assets/5a8d026a-6d94-446b-b6f7-26e54b6e7c42)
+两次标定的结果相差有点大
+![image](https://github.com/user-attachments/assets/f315bfab-063b-4237-a14e-378703e7e71e)
