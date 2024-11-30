@@ -36,3 +36,5 @@
 效果不好
 ![image](https://github.com/user-attachments/assets/a4ae1506-4ec8-4f58-b86c-345aad257f43)
 效果不好
+![image](https://github.com/user-attachments/assets/87b477d0-3e0c-4644-9cde-ca47f284e0b4)
+效果稍微好点
