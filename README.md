@@ -48,3 +48,8 @@ ROS自带的标定
 ![image](https://github.com/user-attachments/assets/5a8d026a-6d94-446b-b6f7-26e54b6e7c42)
 两次标定的结果相差有点大
 ![image](https://github.com/user-attachments/assets/f315bfab-063b-4237-a14e-378703e7e71e)
+找其他的标定方法
+
+**12.1~12.2 ：结构设计重构**
+![image](https://github.com/user-attachments/assets/245e42ed-99d5-4eea-88f4-d5890433b632)
+
