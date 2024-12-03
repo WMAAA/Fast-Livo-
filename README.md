@@ -22,6 +22,13 @@
 
 
 **11.29 : 出图**
+
+![image](https://github.com/user-attachments/assets/c03b83b0-e263-45d5-8bec-0efd5d74a8c6)
+![image](https://github.com/user-attachments/assets/57f512bb-dde1-42ee-a207-da8803bb650c)
+![image](https://github.com/user-attachments/assets/f99a336d-3b9e-4e33-bc00-a8ebd1180c91)
+![image](https://github.com/user-attachments/assets/d8d4765b-1f53-44a6-a495-69dbda8869bf)
+启动顺序：雷达->相机->IMU->FastLivo
+
 根据Add 0 3D Points，回到源程序，判断可能是点未在方框内，推测是外参矩阵问题，IMU-Lidar的之前在Fast-LIO中试过是可以的。
 推测可能是Lidar-Camera的问题，之前标外参是转置了，现在转回来尝试一下，就ok了。
 ![image](https://github.com/user-attachments/assets/a8bd62b9-804d-4126-bccd-855f9d3f9ee5)
