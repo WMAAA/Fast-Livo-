@@ -366,7 +366,7 @@ hwtime_d435i 硬件时间
 
 继续标定海康相机的外参
 
-![image-20241211225600076](/home/wenming/.config/Typora/typora-user-images/image-20241211225600076.png)
+![image-20241216113436999](assets/image-20241216113436999.png)
 
 效果不好，看看别人的像素比例如何gitee —— https://gitee.com/gwmunan/fast-livo_-reproduction
 
