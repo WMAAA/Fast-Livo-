@@ -368,15 +368,13 @@ hwtime_d435i 硬件时间
 
 ![image-20241216113436999](assets/image-20241216113436999.png)
 
-效果不好，看看别人的像素比例如何gitee —— https://gitee.com/gwmunan/fast-livo_-reproduction
+ [效果不好，看看别人的像素比例如何gitee](https://gitee.com/gwmunan/fast-livo_-reproduction)
 
 ## 12.12  海康相机外参标定 
 
-![image-20241216113109070](Reproduction log.assets/image-20241216113109070.png)
+模仿gitee的yaml文件配置自己的相机
 
-模仿yaml文件配置自己的相机
-
-外参标定始终无法成功
+外参标定始终无法成功，可能是横条问题
 
 ## 12.13~12.14 调海康相机驱动 + 外参标定
 
@@ -396,7 +394,9 @@ hwtime_d435i 硬件时间
 
 
 
+```
 rosrun kalibr kalibr_calibrate_cameras --models pinhole-radtan pinhole-radtan --target aprilgrid_kyipad.yaml --bag ~/Desktop/catkin_ws/2024-12-15-21-44-57.bag --topics /hikrobot_camera/rgb /camera/color/image_raw --show-extraction --approx-sync 0.04
+```
 
 
 
