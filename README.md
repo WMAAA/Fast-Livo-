@@ -73,3 +73,7 @@ ROS自带的标定
 标定焦距方差大
 ![image](https://github.com/user-attachments/assets/f07b2108-024e-4b0c-a36b-c072a56049e9)
 
+
+
+rosrun kalibr kalibr_calibrate_cameras --models pinhole-radtan pinhole-radtan --target aprilgrid_kyipad.yaml --bag ~/Desktop/catkin_ws/2024-12-15-21-44-57.bag --topics /hikrobot_camera/rgb /camera/color/image_raw --show-extraction --approx-sync 0.04
+
