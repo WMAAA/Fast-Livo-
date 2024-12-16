@@ -372,7 +372,7 @@ hwtime_d435i 硬件时间
 
 ## 12.12  海康相机外参标定 
 
-![image-20241212200934882](/home/wenming/.config/Typora/typora-user-images/image-20241212200934882.png)
+![image-20241216113109070](Reproduction log.assets/image-20241216113109070.png)
 
 模仿yaml文件配置自己的相机
 
@@ -394,3 +394,10 @@ hwtime_d435i 硬件时间
 
 由于lidar_d435i是ok的，故打算使用kalibr的多相机标定进行外参标定->可得到hik相机_lidar之间的外参
 
+
+
+rosrun kalibr kalibr_calibrate_cameras --models pinhole-radtan pinhole-radtan --target aprilgrid_kyipad.yaml --bag ~/Desktop/catkin_ws/2024-12-15-21-44-57.bag --topics /hikrobot_camera/rgb /camera/color/image_raw --show-extraction --approx-sync 0.04
+
+
+
+调通github联动contributor
