@@ -1,8 +1,8 @@
 # livox mapping
 
-![image-20241209161847378](/home/wenming/.config/Typora/typora-user-images/image-20241209161847378.png)
+![image-20241209161847378](assets/image-20241209161847378.png)
 
-![image-20241209161902542](/home/wenming/.config/Typora/typora-user-images/image-20241209161902542.png)
+![image-20241209161902542](assets/image-20241209161902542.png)
 
 # Reproduction log
 
@@ -85,7 +85,7 @@ ROS自带的标定
 
 最后使用屏幕作为标定板，解决标定板不平的问题。最后标出来，与出厂数据也较为接近，使用该数据！
 
-![image-20241204144150953](/home/wenming/.config/Typora/typora-user-images/image-20241204144150953.png)
+![image-20241216113614740](assets/image-20241216113614740.png)
 
 ## **12.4 ~ 12.5：IMU时间戳修正**
 
@@ -98,7 +98,7 @@ ROS自带的标定
 
 同样借助火星实验室的lidar_imu_init项目进行标定
 
-![image-20241204202134114](/home/wenming/.config/Typora/typora-user-images/image-20241204202134114.png)
+![image-20241216113626274](assets/image-20241216113626274.png)
 
 [Final Result] Rotation LiDAR to IMU    =  -8.982750 -84.874467 108.015758 deg
 [Final Result] Translation LiDAR to IMU = -0.059569  0.067989 -0.169565 m
@@ -129,9 +129,9 @@ ROS自带的标定
 
 差不多，并且根据159和173的时间差，确实是相差14s左右
 
-![image-20241204203901240](/home/wenming/.config/Typora/typora-user-images/image-20241204203901240.png)
+![image-20241216114044441](assets/image-20241216114044441.png)
 
-![image-20241204205214269](/home/wenming/.config/Typora/typora-user-images/image-20241204205214269.png)
+![image-20241204205214269](assets/image-20241204205214269.png)
 
  0.007541 -0.999859 -0.015027 -0.048085
 -0.044751  0.014675 -0.998890 -0.071753
@@ -140,17 +140,17 @@ ROS自带的标定
 
 开始运行Fast-LIVO
 
-![image-20241204210435820](/home/wenming/.config/Typora/typora-user-images/image-20241204210435820.png)
+![image-20241204210435820](assets/image-20241204210435820.png)
 
 还是会出现漂移
 
-![image-20241204210801258](/home/wenming/.config/Typora/typora-user-images/image-20241204210801258.png) 
+![image-20241204210801258](assets/image-20241204210801258.png) 
 
 时间戳为一致的，但是不确保为无时延系统
 
 考虑是距离太近的原因
 
-![image-20241204211039404](/home/wenming/.config/Typora/typora-user-images/image-20241204211039404.png)
+![image-20241204211039404](assets/image-20241204211039404.png)
 
 调远距离，仍然跑飞 
 
@@ -160,25 +160,25 @@ ROS自带的标定
 
 修改了imu_cbk里的代码
 
-![image-20241205114401147](/home/wenming/.config/Typora/typora-user-images/image-20241205114401147.png)
+![image-20241205114401147](assets/image-20241205114401147.png)
 
 修改了img_cbk里的代码
 
-![image-20241205114458498](/home/wenming/.config/Typora/typora-user-images/image-20241205114458498.png)
+![image-20241205114458498](assets/image-20241205114458498.png)
 
 不动的时候能够正常出图
 
-![image-20241205114522764](/home/wenming/.config/Typora/typora-user-images/image-20241205114522764.png)
+![image-20241205114522764](assets/image-20241205114522764.png)
 
 但是移动仍然漂移严重
 
-![image-20241205114706329](/home/wenming/.config/Typora/typora-user-images/image-20241205114706329.png)
+![image-20241205114706329](assets/image-20241205114706329.png)
 
-![image-20241205114749831](/home/wenming/.config/Typora/typora-user-images/image-20241205114749831.png)
+![image-20241205114749831](assets/image-20241205114749831.png)
 
 相机换了新内参后的外参标定
 
-![image-20241205125452508](/home/wenming/.config/Typora/typora-user-images/image-20241205125452508.png)
+![image-20241205125452508](assets/image-20241205125452508.png)
 
 0.00874713,-0.999851,-0.0149063,-0.234126
 -0.0265367,0.0146695,-0.99954,-0.0372584
@@ -187,7 +187,7 @@ ROS自带的标定
 
 修改曝光时间为10ms,50ms都是会飞，用相机的imu就需要IMU初始化，用wit的imu就不需要IMU初始化
 
-![image-20241205161557481](/home/wenming/.config/Typora/typora-user-images/image-20241205161557481.png)
+![image-20241205161557481](assets/image-20241205161557481.png)
 
 ## **12.6 : 装配新硬件 + 找到漂移原因：时间戳精确度问题**
 
@@ -207,15 +207,15 @@ ROS自带的标定
 
 bug已修复，由于image的频率更高，所以概率上image比lidar更早到，当img先到的时候，lidar还没到，那么lidar_init_time还没被赋值，仍为0，此时就会出现问题。加上一个限制，只有雷达到了，才能进行delta_time的计算。
 
-![image-20241207124421236](/home/wenming/.config/Typora/typora-user-images/image-20241207124421236.png)
+![image-20241207124421236](assets/image-20241207124421236.png)
 
-![image-20241207124315163](/home/wenming/.config/Typora/typora-user-images/image-20241207124315163.png)
+![image-20241207124315163](assets/image-20241207124315163.png)
 
-![image-20241207124346810](/home/wenming/.config/Typora/typora-user-images/image-20241207124346810.png)
+![image-20241207124346810](assets/image-20241207124346810.png)
 
 **修复相机无法一次ctrl+c及时退出的bug：**
 
-![image-20241207150427132](/home/wenming/.config/Typora/typora-user-images/image-20241207150427132.png)
+![image-20241207150427132](assets/image-20241207150427132.png)
 
 重新设置为cleand4345i.cpp
 
@@ -229,9 +229,9 @@ bug已修复，由于image的频率更高，所以概率上image比lidar更早�
 
 尝试2：使用了精简版低频的color + color_frame.get_timestamp()来做，时间戳为214开头，初始化完后，直接飞天？
 
-![image-20241207221526731](/home/wenming/.config/Typora/typora-user-images/image-20241207221526731.png)
+![image-20241207221526731](assets/image-20241207221526731.png)
 
-![image-20241207221534901](/home/wenming/.config/Typora/typora-user-images/image-20241207221534901.png)
+![image-20241207221534901](assets/image-20241207221534901.png)
 
 并且会报这个错误，尝试增大了config里的参数，但是仍然不行。
 
@@ -239,23 +239,23 @@ bug已修复，由于image的频率更高，所以概率上image比lidar更早�
 
 **雷达1->10拆包查看：**
 
-![image-20241207142146682](/home/wenming/.config/Typora/typora-user-images/image-20241207142146682.png)
+![image-20241207142146682](assets/image-20241207142146682.png)
 
 播放包，用rviz查看，是不断旋转的，可以确定是扫到一部分就发一部分的。
 
-![image-20241207144630137](/home/wenming/.config/Typora/typora-user-images/image-20241207144630137.png)
+![image-20241207144630137](assets/image-20241207144630137.png)
 
 
 
 **录包：hit_indoor.bag 10G**
 
-![image-20241207154343634](/home/wenming/.config/Typora/typora-user-images/image-20241207154343634.png)
+![image-20241207154343634](assets/image-20241207154343634.png)
 
 快速移动，雷达退化的时候都会导致漂移
 
 尝试官方demo，修改了lasermapping后，导致官方demo都出现了漂移
 
-![image-20241207171947612](/home/wenming/.config/Typora/typora-user-images/image-20241207171947612.png)
+![image-20241207171947612](assets/image-20241207171947612.png)
 
 ## **12.8 ：CSDN思路 **
 
@@ -263,11 +263,11 @@ bug已修复，由于image的频率更高，所以概率上image比lidar更早�
 
 修改livox驱动，修改camera驱动，然后启动，无硬同步，软同步。创建一个ky_ws，进行尝试
 
-![image-20241208133352741](/home/wenming/.config/Typora/typora-user-images/image-20241208133352741.png)
+![image-20241208133352741](assets/image-20241208133352741.png)
 
 大的晃动还是会跑飞,这个好像还是加了GPRMC的，换回原版的livox_ros_driver试试
 
-![image-20241208135242542](/home/wenming/.config/Typora/typora-user-images/image-20241208135242542.png)
+![image-20241208135242542](assets/image-20241208135242542.png)
 
 原地还是会抖动
 
@@ -285,15 +285,15 @@ bug已修复，由于image的频率更高，所以概率上image比lidar更早�
 
 freecc
 
-![image-20241210102012542](/home/wenming/.config/Typora/typora-user-images/image-20241210102012542.png)
+![image-20241210102012542](assets/image-20241210102012542.png)
 
 hwtime_d435i 硬件时间
 
-![image-20241210102453477](/home/wenming/.config/Typora/typora-user-images/image-20241210102453477.png)
+![image-20241210102453477](assets/image-20241210102453477.png)
 
 可能imu也需要使用硬件时间？
 
-![image-20241210104657690](/home/wenming/.config/Typora/typora-user-images/image-20241210104657690.png)
+![image-20241210104657690](assets/image-20241210104657690.png)
 
 ## **12.11 海康d435i外参标定、imu标定、海康相机同步、简书思路、尝试多种时间戳**
 
@@ -301,15 +301,15 @@ hwtime_d435i 硬件时间
 
 - 在设置中添加配置
 
-<img src="/home/wenming/.config/Typora/typora-user-images/image-20241211115925091.png" alt="image-20241211115925091" style="zoom:50%;" />
+<img src="assets/image-20241211115925091.png" alt="image-20241211115925091" style="zoom:50%;" />
 
 海康相机ip设置
 
 - 先设置ubuntu中网口地址
-  - <img src="/home/wenming/.config/Typora/typora-user-images/image-20241211115711237.png" alt="image-20241211115711237" style="zoom:50%;" />
+  - <img src="assets/image-20241211115711237.png" alt="image-20241211115711237" style="zoom:50%;" />
 
 - 再在MVS客户端中右键修改IP地址
-  - <img src="/home/wenming/.config/Typora/typora-user-images/image-20241211115826651.png" alt="image-20241211115826651" style="zoom:50%;" />
+  - <img src="assets/image-20241211115826651.png" alt="image-20241211115826651" style="zoom:50%;" />
 - 雷达保持不变
 
 注意：网段不能一样192.168.1.XX 和 192.168.2.XX
@@ -320,47 +320,47 @@ hwtime_d435i 硬件时间
 
 总是配不准
 
-![image-20241211200940703](/home/wenming/.config/Typora/typora-user-images/image-20241211200940703.png)
+![image-20241211200940703](assets/image-20241211200940703.png)
 
 发现雷达的点云漂移严重
 
-![image-20241211200618851](/home/wenming/.config/Typora/typora-user-images/image-20241211200618851.png)
+![image-20241211200618851](assets/image-20241211200618851.png)
 
 剔除这一束外点后
 
-![image-20241211201225194](/home/wenming/.config/Typora/typora-user-images/image-20241211201225194.png)
+![image-20241211201225194](assets/image-20241211201225194.png)
 
 注意不能转成ply后再转回pcd，会丢失intensity信息
 
 重新标注外参
 
-![image-20241211201433270](/home/wenming/.config/Typora/typora-user-images/image-20241211201433270.png)
+![image-20241211201433270](assets/image-20241211201433270.png)
 
 还是不对劲，，可能是照片的问题，左上角的阳光？
 
 扫描地板的时候出现了负高度的情况，
 
-![image-20241211215358112](/home/wenming/.config/Typora/typora-user-images/image-20241211215358112.png)
+![image-20241211215358112](assets/image-20241211215358112.png)
 
 可能是地板的反光问题，找了一处毛坯地板at茶水间，检查点云没问题
 
-![image-20241211214603720](/home/wenming/.config/Typora/typora-user-images/image-20241211214603720.png)
+![image-20241211214603720](assets/image-20241211214603720.png)
 
-<img src="/home/wenming/.config/Typora/typora-user-images/image-20241211214528913.png" alt="image-20241211214528913" style="zoom:67%;" />
+<img src="assets/image-20241211214528913.png" alt="image-20241211214528913" style="zoom:67%;" />
 
 先尝试d435i的标定
 
-![image-20241211214847386](/home/wenming/.config/Typora/typora-user-images/image-20241211214847386.png)
+![image-20241211214847386](assets/image-20241211214847386.png)
 
-![image-20241211214835750](/home/wenming/.config/Typora/typora-user-images/image-20241211214835750.png)
+![image-20241211214835750](assets/image-20241211214835750.png)
 
 效果还是不行
 
 改成indoor.yaml试一下
 
-![image-20241211215223756](/home/wenming/.config/Typora/typora-user-images/image-20241211215223756.png)
+![image-20241211215223756](assets/image-20241211215223756.png)
 
-![image-20241211215114622](/home/wenming/.config/Typora/typora-user-images/image-20241211215114622.png)
+![image-20241211215114622](assets/image-20241211215114622.png)
 
 效果还不错
 
