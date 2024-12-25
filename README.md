@@ -401,3 +401,89 @@ rosrun kalibr kalibr_calibrate_cameras --models pinhole-radtan pinhole-radtan --
 
 
 调通github联动contributor
+
+# 标定
+
+[参考链接joint-lidar-camera-calib](https://github.com/hku-mars/joint-lidar-camera-calib)
+
+## 使用
+
+### 数据采集
+
+1. 多纹理平面，至少需要三个具有非共面法向量的平面向量的平面。否则，场景会导致点到平面配准的退化，从而损害外参校准精度。
+2. 初始外参，给定初始外在参数（初始旋转误差< 5度，初始平移误差< 0.5 m），6~8帧数据通常足以校准参数。用户在记录新帧时稍微改变传感器套件的偏航角（约 5 度）和 xy 平移（约 10 厘米）。请注意，**应避免纯平移（无旋转）**，因为这会导致相机自校准的退化。如果能够解决上述问题，连续运动也是可以接受的。
+3. 如果外部参数的初始猜测不可用，用户可以使用手眼校准来恢复它们。提供了示例代码（ *src/hand_eye_calib.cpp* ）和位姿文件（ *sample_data/hand_eye_calib* ）。
+
+### 初始化
+
+1. 相机自校准
+
+2. 激光雷达位姿估计
+
+   - 首先，使用增量点到平面配准来估计每个 LiDAR 位姿（在*config/registration.yaml*中输入您的数据路径）：
+
+     ```
+     roslaunch balm2 registration.launch
+     ```
+
+   - 进行 LiDAR  BA调整（在*config/conduct_BA.yaml*中输入您的数据路径）：
+
+     ```
+     roslaunch balm2 conduct_BA.launch
+     ```
+
+3. 联合标定，按如下方式组织数据文件夹：
+
+   ```
+   .
+   ├── clouds
+   │   ├── 0.pcd
+   │   ├── ...
+   │   └── x.pcd
+   ├── config
+   │   └── config.yaml
+   ├── images
+   │   ├── 0.png
+   │   ├── ...
+   │   └── x.png
+   ├── LiDAR_pose
+   │   └── lidar_poses_BA.txt
+   ├── result
+   └── SfM
+       ├── cameras.txt
+       ├── images.txt
+       └── points3D.txt
+   ```
+
+   联合优化
+
+   ```
+   roslaunch joint_lidar_camera_calib calib.launch
+   ```
+
+### 适应性
+
+1. 仅外部校准，请在*config/config.yaml*中将*keep_intrinsic_fixed*设置为*true* 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
