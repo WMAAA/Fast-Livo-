@@ -394,15 +394,35 @@ hwtime_d435i 硬件时间
 
 由于lidar_d435i是ok的，故打算使用kalibr的多相机标定进行外参标定->可得到hik相机_lidar之间的外参
 
-
-
 ```
 rosrun kalibr kalibr_calibrate_cameras --models pinhole-radtan pinhole-radtan --target aprilgrid_kyipad.yaml --bag ~/Desktop/catkin_ws/2024-12-15-21-44-57.bag --topics /hikrobot_camera/rgb /camera/color/image_raw --show-extraction --approx-sync 0.04
 ```
 
-
-
 调通github联动contributor
+
+
+
+## 12.25-12.26 尝试室内标定
+
+![image-20241226212314554](assets/image-20241226212314554.png)
+
+![image-20241226212437760](assets/image-20241226212437760.png)
+
+重新imu-lidar标定
+
+![image-20241226212500031](assets/image-20241226212500031.png)
+
+<img src="assets/image-20241226212827031.png" alt="image-20241226212827031" style="zoom: 50%;" />
+
+和之前尝试的FastLivo轨迹相同，但是此次没有出现漂移，所以关键还是相机带来的可能进行了负优化。关键点还是外参和时间戳的对齐。
+
+![image-20241226212730344](assets/image-20241226212730344.png)
+
+
+
+
+
+
 
 # 标定
 
