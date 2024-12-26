@@ -402,7 +402,9 @@ rosrun kalibr kalibr_calibrate_cameras --models pinhole-radtan pinhole-radtan --
 
 
 
-## 12.25-12.26 尝试室内标定
+## 12.25-12.26 继续尝试标定
+
+进行了多次的户外标定后，均已失败告终。尝试室内标定。
 
 ![image-20241226212314554](assets/image-20241226212314554.png)
 
