@@ -420,6 +420,10 @@ rosrun kalibr kalibr_calibrate_cameras --models pinhole-radtan pinhole-radtan --
 
 ![image-20241226212730344](assets/image-20241226212730344.png)
 
+尝试原始驱动 + FastLivo里的deltatime:
+
+![image-20241226215752836](assets/image-20241226215752836.png)
+
 
 
 
