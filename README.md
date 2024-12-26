@@ -16,6 +16,8 @@
 
 ## **11.24：Fast-LIO跑通（外接imu）**
 
+![image-20241226203923339](assets/image-20241226203923339.png)
+
 ## **11.25：外参标定测试**
 
 ![FastLivo_ext](https://github.com/user-attachments/assets/6d235952-a04b-47a1-9366-d137048dc46b)
