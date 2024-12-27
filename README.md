@@ -506,15 +506,17 @@ rosrun kalibr kalibr_calibrate_cameras --models pinhole-radtan pinhole-radtan --
 
 ![image-20241227170528106](assets/image-20241227170528106.png)
 
-开机看一次，结束时看一次
+开机看一次，结束时看一次，格式为17个字节
 
 ![image-20241227170751466](assets/image-20241227170751466.png)
 
-是在变的
+没问题，是在变的
+
+camera驱动内读到的数据：
 
 ![image-20241227171148699](assets/image-20241227171148699.png)
 
-camera驱动读的是高八位，格式不多，参考vell01雷达驱动的保存格式
+camera驱动读的是高八位，格式不多，参考vell01雷达驱动的保存格式，应该为16个字节
 
 ![image-20241227173808307](assets/image-20241227173808307.png)
 
