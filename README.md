@@ -410,25 +410,33 @@ rosrun kalibr kalibr_calibrate_cameras --models pinhole-radtan pinhole-radtan --
 
 ![image-20241226212437760](assets/image-20241226212437760.png)
 
-重新imu-lidar标定
+重新imu-lidar标定，使用FastLIO里的Lidar_Imu_Init包
 
 ![image-20241226212500031](assets/image-20241226212500031.png)
 
 <img src="assets/image-20241226212827031.png" alt="image-20241226212827031" style="zoom: 50%;" />
 
-和之前尝试的FastLivo轨迹相同，但是此次没有出现漂移，所以关键还是相机带来的可能进行了负优化。关键点还是外参和时间戳的对齐。
+和之前尝试的FastLivo轨迹相同，但是此次没有出现漂移，所以关键还是相机带来的可能进行了负优化。所以关键点还是外参和时间戳的对齐。
 
 ![image-20241226212730344](assets/image-20241226212730344.png)
 
-尝试原始驱动 + FastLivo里的deltatime:
+尝试原始雷达、IMU驱动 + FastLivo里的deltatime处理:
 
 ![image-20241226215752836](assets/image-20241226215752836.png)
+
+出现跑不动的情况，原因是3072*2048的图像处理起来太耗时了，故重新标定了1280\*1024，如下所示：
+
+![image-20241227110029456](assets/image-20241227110029456.png)
+
+出图如下所示：
 
 ![image-20241226223722565](assets/image-20241226223722565.png)
 
 ![image-20241226223741135](assets/image-20241226223741135.png)
 
 ![image-20241226223753461](assets/image-20241226223753461.png)
+
+接下来有用Lidar_Imu_Init跑了一下，做了极限测试，看看上限，表现得很好。如下所示为机械楼。
 
 ![image-20241226224531404](assets/image-20241226224531404.png)
 
@@ -445,6 +453,12 @@ rosrun kalibr kalibr_calibrate_cameras --models pinhole-radtan pinhole-radtan --
 ![image-20241226224904221](assets/image-20241226224904221.png)
 
 ![image-20241226224953983](assets/image-20241226224953983.png) 	![image-20241226225008926](assets/image-20241226225008926.png)
+
+## 12.27 尝试时间同步
+
+思路1：雷达驱动的三个方案——LIV_HandHold、vell001、CSDN(D435i+Avia)
+
+思路2：是否可以学FastLio（Lidar_Imu_Init）里找到完美的Lidar_Imu_deltatime 和 Lidar_Camera_deltatime
 
 
 
