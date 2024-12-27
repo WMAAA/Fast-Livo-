@@ -456,9 +456,19 @@ rosrun kalibr kalibr_calibrate_cameras --models pinhole-radtan pinhole-radtan --
 
 ## 12.27 尝试时间同步
 
-思路1：雷达驱动的三个方案——LIV_HandHold、vell001、CSDN(D435i+Avia)、简达智能
+思路1：雷达驱动的四个方案——LIV_HandHold、vell001、CSDN(D435i+Avia)、简达智能
 
 思路2：是否可以学FastLio（Lidar_Imu_Init）里找到完美的Lidar_Imu_deltatime 和 Lidar_Camera_deltatime
+
+
+
+
+
+
+
+
+
+
 
 
 
