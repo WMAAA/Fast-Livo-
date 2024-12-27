@@ -522,10 +522,6 @@ camera驱动读的是高八位，格式不多，参考vell01雷达驱动的保�
 
 
 
-
-
-
-
 针对问题三：找到代码出处
 
 ```c++
@@ -541,13 +537,15 @@ if (msg_header_time < last_timestamp_img)
 
 
 
-
-
 **再试试gundasmart的雷达驱动 + 纯净的FastLivo**
 
 
 
 **再试试CSDN的雷达驱动  + 纯净的FastLivo**
+
+启动前删除/dev/shm/shm_timer
+
+![image-20241227184531291](assets/image-20241227184531291.png)
 
 
 
