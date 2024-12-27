@@ -460,9 +460,124 @@ rosrun kalibr kalibr_calibrate_cameras --models pinhole-radtan pinhole-radtan --
 
 思路2：是否可以学FastLio（Lidar_Imu_Init）里找到完美的Lidar_Imu_deltatime 和 Lidar_Camera_deltatime
 
-思路3：简达智能FastLivo里相机时间加了0.1s，对于时间的debug
+思路3：简达智能FastLivo里相机时间加了0.1s，对于时间的debugqqqqqqqqqqqfdfdsdfdsfeew
 
 
+
+开始尝试：由于vell01相机读取的是/dev/shm/shm_timer里的时间戳，所以其他的lidar驱动(除了vell01的雷达驱动)在存放时间戳时需要修改路径。
+
+**-----------先试试vell001的雷达驱动 + 纯净的FastLivo-----------**
+
+需要重新编译vell001雷达驱动，才能启动!!!
+
+![image-20241227162420314](assets/image-20241227162420314.png)
+
+![image-20241227173410414](assets/image-20241227173410414.png)
+
+![image-20241227173808307](assets/image-20241227173808307.png)
+
+
+
+**再试试LIV_handhold的雷达驱动 + 纯净的FastLivo**
+
+需要重新编译雷达驱动，才能启动!!!
+
+![image-20241227163722444](assets/image-20241227163722444.png)
+
+三个问题，一个是imu的159时间戳没对上、另一个是相机驱动的image_count累加，最后一个是FastLivo内img loop back,  clear buffer
+
+针对问题一：看看LIV_handhold是怎么处理的
+
+针对问题二：是因为相机没有读到雷达的时间戳吗，正确的image_count应该是0~10
+
+修改路径后忘记重新编译，重新编译后时间戳修改了
+
+![image-20241227165909199](assets/image-20241227165909199.png)
+
+但是image_count仍然是不断累加的
+
+![image-20241227165927345](assets/image-20241227165927345.png)
+
+找到代码出处
+
+![image-20241227170207012](assets/image-20241227170207012.png)
+
+发现数据是无效的，也就是lidar驱动里只更新了第一帧的timeshare，查看shm_timer情况
+
+![image-20241227170528106](assets/image-20241227170528106.png)
+
+开机看一次，结束时看一次
+
+![image-20241227170751466](assets/image-20241227170751466.png)
+
+是在变的
+
+![image-20241227171148699](assets/image-20241227171148699.png)
+
+camera驱动读的是高八位，格式不多，参考vell01雷达驱动的保存格式
+
+![image-20241227173808307](assets/image-20241227173808307.png)
+
+
+
+
+
+
+
+针对问题三：找到代码出处
+
+```c++
+if (msg_header_time < last_timestamp_img)
+    {
+        ROS_ERROR("img loop back, clear buffer");
+        img_buffer.clear();
+        img_time_buffer.clear();
+    }
+```
+
+是因为相机的时间戳倒流了？先解决问题二，看看能不能一并修复。
+
+
+
+
+
+**再试试gundasmart的雷达驱动 + 纯净的FastLivo**
+
+
+
+**再试试CSDN的雷达驱动  + 纯净的FastLivo**
+
+
+
+**-----------先试试vell001的雷达驱动 + gundaSmart的FastLivo-----------**
+
+
+
+**再试试LIV_handhold的雷达驱动 + gundaSmart的FastLivo**
+
+
+
+**再试试gundasmart的雷达驱动 + gundaSmart的FastLivo**
+
+
+
+**再试试CSDN的雷达驱动  + gundaSmart的FastLivo**
+
+
+
+**-----------先试试vell001的雷达驱动 + ky的FastLivo-----------**
+
+
+
+**再试试LIV_handhold的雷达驱动 + ky的FastLivo**
+
+
+
+**再试试gundasmart的雷达驱动 + ky的FastLivo**
+
+
+
+**再试试CSDN的雷达驱动  + ky的FastLivo**
 
 
 
