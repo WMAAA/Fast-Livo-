@@ -454,13 +454,59 @@ rosrun kalibr kalibr_calibrate_cameras --models pinhole-radtan pinhole-radtan --
 
 ![image-20241226224953983](assets/image-20241226224953983.png) 	![image-20241226225008926](assets/image-20241226225008926.png)
 
-## 12.27 尝试时间同步
+## 12.27~12.28 尝试时间同步
 
-思路1：雷达驱动的四个方案——LIV_HandHold、vell001、CSDN(D435i+Avia)、简达智能(livox_ros_driver2)
+思路1：雷达驱动的四个方案——LIV_HandHold、vell001、CSDN(D435i+Avia)、简达智能(livox_ros_driver2驱动的雷达型号不适配mid-70，可看和官方livox_ros_driver2异同)
 
 思路2：是否可以学FastLio（Lidar_Imu_Init）里找到完美的Lidar_Imu_deltatime 和 Lidar_Camera_deltatime
 
-思路3：简达智能FastLivo里相机时间加了0.1s，对于时间的debugqqqqqqqqqqqfdfdsdfdsfeew
+思路3：简达智能FastLivo里相机时间加了0.1s，对于时间的debug
+
+
+
+简达智能(livox_ros_driver2驱动的雷达型号不适配mid-70，可看和官方livox_ros_driver2异同) : 基本是只改了lddc文件
+
+1. ip不同
+
+![image-20241228102530447](assets/image-20241228102530447.png)
+
+2. 编译版本
+
+![image-20241228102604658](assets/image-20241228102604658.png)
+
+3. 版本号？
+
+   ![image-20241228102922081](assets/image-20241228102922081.png)
+
+4. lddc.cpp
+
+   ![image-20241228103801688](assets/image-20241228103801688.png)
+
+   ![image-20241228103822705](assets/image-20241228103822705.png)
+
+   ![image-20241228103835380](assets/image-20241228103835380.png)
+
+5. lddc.h
+
+   ![image-20241228103922916](assets/image-20241228103922916.png)
+
+   ![image-20241228103934685](assets/image-20241228103934685.png)
+
+6. common.h
+
+   ![image-20241228104053158](assets/image-20241228104053158.png)
+
+   
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -537,7 +583,7 @@ if (msg_header_time < last_timestamp_img)
 
 
 
-**再试试gundasmart的雷达驱动 + 纯净的FastLivo**
+**再试试仿gundasmart的雷达驱动 + 纯净的FastLivo**
 
 
 
@@ -557,7 +603,7 @@ if (msg_header_time < last_timestamp_img)
 
 
 
-**再试试gundasmart的雷达驱动 + gundaSmart的FastLivo**
+**再试试仿gundasmart的雷达驱动 + gundaSmart的FastLivo**
 
 
 
@@ -573,7 +619,7 @@ if (msg_header_time < last_timestamp_img)
 
 
 
-**再试试gundasmart的雷达驱动 + ky的FastLivo**
+**再试试仿gundasmart的雷达驱动 + ky的FastLivo**
 
 
 
