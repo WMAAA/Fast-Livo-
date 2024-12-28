@@ -408,7 +408,7 @@ rosrun kalibr kalibr_calibrate_cameras --models pinhole-radtan pinhole-radtan --
 
 ![image-20241228151152729](assets/image-20241228151152729.png)
 
-上传仓库：
+上传仓库：https://github.com/kygotocv/hikrobot_camera_driver
 
 ## 12.25-12.26 继续尝试标定
 
