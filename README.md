@@ -456,63 +456,19 @@ rosrun kalibr kalibr_calibrate_cameras --models pinhole-radtan pinhole-radtan --
 
 ## 12.27~12.28 尝试时间同步
 
-思路1：雷达驱动的四个方案——LIV_HandHold、vell001、CSDN(D435i+Avia)、简达智能(livox_ros_driver2驱动的雷达型号不适配mid-70，可看和官方livox_ros_driver2异同)
+### 思路1：雷达驱动四个方案  + FastLivo三个方案组合
 
-思路2：是否可以学FastLio（Lidar_Imu_Init）里找到完美的Lidar_Imu_deltatime 和 Lidar_Camera_deltatime
+- vell001（用的是ros::Time的时间戳）
 
-思路3：简达智能FastLivo里相机时间加了0.1s，对于时间的debug
-
-
-
-简达智能(livox_ros_driver2驱动的雷达型号不适配mid-70，可看和官方livox_ros_driver2异同) : 基本是只改了lddc文件
-
-1. ip不同
-
-![image-20241228102530447](assets/image-20241228102530447.png)
-
-2. 编译版本
-
-![image-20241228102604658](assets/image-20241228102604658.png)
-
-3. 版本号？
-
-   ![image-20241228102922081](assets/image-20241228102922081.png)
-
-4. lddc.cpp
-
-   ![image-20241228103801688](assets/image-20241228103801688.png)
-
-   ![image-20241228103822705](assets/image-20241228103822705.png)
-
-   ![image-20241228103835380](assets/image-20241228103835380.png)
-
-5. lddc.h
-
-   ![image-20241228103922916](assets/image-20241228103922916.png)
-
-   ![image-20241228103934685](assets/image-20241228103934685.png)
-
-6. common.h
-
-   ![image-20241228104053158](assets/image-20241228104053158.png)
-
-   
+- LIV_HandHold（用的是雷达的时间戳）
+- 简达智能(livox_ros_driver2驱动的雷达型号不适配mid-70，可看和官方livox_ros_driver2异同:用的是雷达的时间戳)
+- CSDN(D435i+Avia：用的是ros::Time的时间戳)
 
 
 
+**开始尝试：**由于vell01相机读取的是/dev/shm/shm_timer里的时间戳，所以其他的lidar驱动(除了vell01的雷达驱动)在存放时间戳时需要修改路径。
 
-
-
-
-
-
-
-
-
-
-开始尝试：由于vell01相机读取的是/dev/shm/shm_timer里的时间戳，所以其他的lidar驱动(除了vell01的雷达驱动)在存放时间戳时需要修改路径。
-
-**-----------先试试vell001的雷达驱动 + 纯净的FastLivo-----------**
+#### **1.vell001雷达驱动 + 纯净FastLivo**
 
 需要重新编译vell001雷达驱动，才能启动!!!
 
@@ -522,9 +478,17 @@ rosrun kalibr kalibr_calibrate_cameras --models pinhole-radtan pinhole-radtan --
 
 ![image-20241227173808307](assets/image-20241227173808307.png)
 
+![image-20241228112248159](assets/image-20241228112248159.png)
+
+![image-20241228112641004](assets/image-20241228112641004.png)
 
 
-**再试试LIV_handhold的雷达驱动 + 纯净的FastLivo**
+
+
+
+
+
+#### **2.LIV_handhold雷达驱动 + 纯净FastLivo**
 
 需要重新编译雷达驱动，才能启动!!!
 
@@ -583,47 +547,107 @@ if (msg_header_time < last_timestamp_img)
 
 
 
-**再试试仿gundasmart的雷达驱动 + 纯净的FastLivo**
+#### **3.仿gundasmart雷达驱动 + 纯净FastLivo**
+
+简达智能(livox_ros_driver2驱动的雷达型号不适配mid-70，可看和官方livox_ros_driver2异同) : 基本是只改了lddc文件
+
+1. ip不同
+
+![image-20241228102530447](assets/image-20241228102530447.png)
+
+2. 编译版本
+
+![image-20241228102604658](assets/image-20241228102604658.png)
+
+3. 版本号？1.0.0 ~ 1.2.4
+
+   ![image-20241228102922081](assets/image-20241228102922081.png)
+
+4. lddc.cpp
+
+   ![image-20241228103801688](assets/image-20241228103801688.png)
+
+   ![image-20241228103822705](assets/image-20241228103822705.png)
+
+   ![image-20241228103835380](assets/image-20241228103835380.png)
+
+5. lddc.h
+
+   ![image-20241228103922916](assets/image-20241228103922916.png)
+
+   ![image-20241228103934685](assets/image-20241228103934685.png)
+
+6. common.h
+
+   ![image-20241228104053158](assets/image-20241228104053158.png)
+
+主要区别：lddc文件内不同
+
+下载纯净版本的livox_lidar_driver放入文件夹im_gundasmart
+
+![image-20241228113903855](assets/image-20241228113903855.png)
 
 
 
-**再试试CSDN的雷达驱动  + 纯净的FastLivo**
+
+
+
+
+
+
+
+
+
+
+#### **4.CSDN雷达驱动  + 纯净FastLivo**
 
 启动前删除/dev/shm/shm_timer
 
 ![image-20241227184531291](assets/image-20241227184531291.png)
 
+启动没问题
 
+![image-20241228112446919](assets/image-20241228112446919.png)
 
-**-----------先试试vell001的雷达驱动 + gundaSmart的FastLivo-----------**
-
-
-
-**再试试LIV_handhold的雷达驱动 + gundaSmart的FastLivo**
-
-
-
-**再试试仿gundasmart的雷达驱动 + gundaSmart的FastLivo**
+![image-20241228112505675](assets/image-20241228112505675.png)
 
 
 
-**再试试CSDN的雷达驱动  + gundaSmart的FastLivo**
+#### **5.vell001雷达驱动 + gundaSmart的FastLivo**
 
 
 
-**-----------先试试vell001的雷达驱动 + ky的FastLivo-----------**
+#### **6.LIV_handhold雷达驱动 + gundaSmart的FastLivo**
 
 
 
-**再试试LIV_handhold的雷达驱动 + ky的FastLivo**
+#### **7.仿gundasmart雷达驱动 + gundaSmart的FastLivo**
 
 
 
-**再试试仿gundasmart的雷达驱动 + ky的FastLivo**
+#### **8.CSDN雷达驱动  + gundaSmart的FastLivo**
 
 
 
-**再试试CSDN的雷达驱动  + ky的FastLivo**
+#### **9.vell001雷达驱动 + ky的FastLivo**
+
+
+
+#### **10.LIV_handhold雷达驱动 + ky的FastLivo**
+
+
+
+#### **11.仿gundasmart雷达驱动 + ky的FastLivo**
+
+
+
+#### **12.CSDN雷达驱动  + ky的FastLivo**
+
+
+
+### 思路2：是否可以学FastLio（Lidar_Imu_Init）里找到完美的Lidar_Imu_deltatime 和 Lidar_Camera_deltatime
+
+
 
 
 
