@@ -402,6 +402,14 @@ rosrun kalibr kalibr_calibrate_cameras --models pinhole-radtan pinhole-radtan --
 
 
 
+## 12.16 ~ 12.25 调通海康相机驱动
+
+使用简书vell001的相机驱动模版 + 调用函数实现：分辨率可调 + 曝光时间可调(关闭自动曝光模式) + 亮度增益可调 + Gamma可调 + 帧率控制可调 + 可读sharetime(/dev/shm/shm_timer)
+
+![image-20241228151152729](assets/image-20241228151152729.png)
+
+上传仓库：
+
 ## 12.25-12.26 继续尝试标定
 
 进行了多次的户外标定后，均已失败告终。尝试室内标定。
@@ -463,6 +471,12 @@ rosrun kalibr kalibr_calibrate_cameras --models pinhole-radtan pinhole-radtan --
 - LIV_HandHold（用的是雷达的时间戳）
 - 简达智能(livox_ros_driver2驱动的雷达型号不适配mid-70，可看和官方livox_ros_driver2异同:用的是雷达的时间戳)
 - CSDN(D435i+Avia：用的是ros::Time的时间戳)
+
+其中两个用雷达时间戳的，还需要额外处理imu的时间戳，这里有两个思路：
+
+1. 记录第一帧与lidar的deltatime (ky版本FastLivo)
+2. 读timeshare？但是可能需要降频
+3. FastLIO の Lidar_IMU_Init得到imu的deltatime
 
 
 
