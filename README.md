@@ -494,6 +494,50 @@ K = [2569.8041347685084, 0.0, 847.994742175456, 0.0, 2569.631359606989, 441.2514
 
 
 
+#### 考察LIV_Handhold 和 简达智能雷达驱动的异同
+
+简达智能(livox_ros_driver2驱动的雷达型号不适配mid-70，可看和官方livox_ros_driver2异同) : 基本是只改了lddc文件
+
+1. ip不同
+
+![image-20241228102530447](assets/image-20241228102530447.png)
+
+2. 编译版本
+
+![image-20241228102604658](assets/image-20241228102604658.png)
+
+3. 版本号？1.0.0 ~ 1.2.4
+
+   ![image-20241228102922081](assets/image-20241228102922081.png)
+
+4. lddc.cpp
+
+   ![image-20241228103801688](assets/image-20241228103801688.png)
+
+   ![image-20241228103822705](assets/image-20241228103822705.png)
+
+   ![image-20241228103835380](assets/image-20241228103835380.png)
+
+5. lddc.h
+
+   ![image-20241228103922916](assets/image-20241228103922916.png)
+
+   ![image-20241228103934685](assets/image-20241228103934685.png)
+
+6. common.h
+
+   ![image-20241228104053158](assets/image-20241228104053158.png)
+
+主要区别：lddc文件内不同
+
+下载纯净版本的livox_lidar_driver放入文件夹im_gundasmart
+
+![image-20241228113903855](assets/image-20241228113903855.png)
+
+和LIV_Handhold雷达驱动的一样，都是用的一样的时间戳
+
+
+
 **开始尝试：**由于vell01相机读取的是/dev/shm/shm_timer里的时间戳，所以其他的lidar驱动(除了vell01的雷达驱动)在存放时间戳时需要修改路径。
 
 #### **1.vell001雷达驱动 + 纯净FastLivo**
@@ -677,59 +721,7 @@ if (msg_header_time < last_timestamp_img)
 
 
 
-#### **3.仿gundasmart雷达驱动 + 纯净FastLivo**
-
-简达智能(livox_ros_driver2驱动的雷达型号不适配mid-70，可看和官方livox_ros_driver2异同) : 基本是只改了lddc文件
-
-1. ip不同
-
-![image-20241228102530447](assets/image-20241228102530447.png)
-
-2. 编译版本
-
-![image-20241228102604658](assets/image-20241228102604658.png)
-
-3. 版本号？1.0.0 ~ 1.2.4
-
-   ![image-20241228102922081](assets/image-20241228102922081.png)
-
-4. lddc.cpp
-
-   ![image-20241228103801688](assets/image-20241228103801688.png)
-
-   ![image-20241228103822705](assets/image-20241228103822705.png)
-
-   ![image-20241228103835380](assets/image-20241228103835380.png)
-
-5. lddc.h
-
-   ![image-20241228103922916](assets/image-20241228103922916.png)
-
-   ![image-20241228103934685](assets/image-20241228103934685.png)
-
-6. common.h
-
-   ![image-20241228104053158](assets/image-20241228104053158.png)
-
-主要区别：lddc文件内不同
-
-下载纯净版本的livox_lidar_driver放入文件夹im_gundasmart
-
-![image-20241228113903855](assets/image-20241228113903855.png)
-
-
-
-
-
-
-
-
-
-
-
-
-
-#### **4.CSDN雷达驱动  + 纯净FastLivo**
+#### **3.CSDN雷达驱动  + 纯净FastLivo**
 
 启动前删除/dev/shm/shm_timer
 
@@ -743,35 +735,27 @@ if (msg_header_time < last_timestamp_img)
 
 
 
-#### **5.vell001雷达驱动 + gundaSmart的FastLivo**
+#### **4.vell001雷达驱动 + gundaSmart的FastLivo**
 
 
 
-#### **6.LIV_handhold雷达驱动 + gundaSmart的FastLivo**
+#### 5**.LIV_handhold雷达驱动 + gundaSmart的FastLivo**
 
 
 
-#### **7.仿gundasmart雷达驱动 + gundaSmart的FastLivo**
+#### **6.CSDN雷达驱动  + gundaSmart的FastLivo**
 
 
 
-#### **8.CSDN雷达驱动  + gundaSmart的FastLivo**
+#### **7.vell001雷达驱动 + ky的FastLivo**
 
 
 
-#### **9.vell001雷达驱动 + ky的FastLivo**
+#### **8.LIV_handhold雷达驱动 + ky的FastLivo**
 
 
 
-#### **10.LIV_handhold雷达驱动 + ky的FastLivo**
-
-
-
-#### **11.仿gundasmart雷达驱动 + ky的FastLivo**
-
-
-
-#### **12.CSDN雷达驱动  + ky的FastLivo**
+#### **9.CSDN雷达驱动  + ky的FastLivo**
 
 
 
