@@ -726,6 +726,12 @@ if (msg_header_time < last_timestamp_img)
 
 一个办法是在img_cbk中记录时间戳，如果时间戳等于上一帧的时间戳，直接退出img_cbk函数
 
+修改纯净版内的代码
+
+![image-20241229200853635](assets/image-20241229200853635.png)
+
+
+
 
 
 #### **3.CSDN雷达驱动  + 纯净FastLivo**
