@@ -724,7 +724,7 @@ if (msg_header_time < last_timestamp_img)
 
 数量是对应的
 
-
+一个办法是在img_cbk中记录时间戳，如果时间戳等于上一帧的时间戳，直接退出img_cbk函数
 
 
 
