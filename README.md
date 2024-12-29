@@ -715,7 +715,13 @@ if (msg_header_time < last_timestamp_img)
 
 ![image-20241229132720246](assets/image-20241229132720246.png)
 
+重新下载了官方的FastLivo代码，对过了没问题，重新跑一次官方的bag包试试。
 
+![image-20241229160028070](assets/image-20241229160028070.png)
+
+![image-20241229160158122](assets/image-20241229160158122.png)
+
+数量是对应的
 
 
 
